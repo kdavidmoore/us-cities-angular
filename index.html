@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="mapsApp">
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Info windows</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIEKQEQmbOz2q9VEINcWWO15WMS5kcoIU"></script>
+    <script src="cities.js"></script>
+    <script src="controller.js"></script>
+  </head>
+  <body ng-controller="mapsController">
+  
+    <div id="map"></div>
+
+  </body>
+</html>
