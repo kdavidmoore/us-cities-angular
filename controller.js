@@ -24,8 +24,12 @@ mapsApp.controller('mapsController', function($scope){
 			'<div id="siteNotice">'+
 			'<h1>'+ city.city +'</h1>'+
 			'<p>'+
-			'Total Population: '+ city.yearEstimate + '</br>'+
-			'2010 Census: ' + city.lastCensus + '</br>'
+			'<strong>Total Population:</strong> '+ city.yearEstimate + '</br>'+
+			'<strong>2010 Census:</strong> ' + city.lastCensus + '</br>'+
+			'<strong>Population Change:</strong> ' + city.change + '</br>'+
+			'<strong>Population Density:</strong> ' + city.lastPopDensity + '</br>'+
+			'<strong>State:</strong> ' + city.state + '</br>'+
+			'<strong>Land Area:</strong> ' + city.landArea +
 			'</p>'+
 			'</div>'+
 			'</div>';
