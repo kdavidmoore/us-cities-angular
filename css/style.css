@@ -81,7 +81,7 @@ html, body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 1024px) {
   /* line 80, ../compass/sass/style.scss */
   #map-wrapper {
     width: 100%;
