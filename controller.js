@@ -34,12 +34,12 @@ mapsApp.controller('mapsController', function($scope, $compile){
 		var contentString =
 			'<div class="city-info">'+
 			'<h1>'+ city.city +'</h1>'+
-			'<h5>Total Population:&nbsp;'+ city.yearEstimate + '</h5>'+
-			'<h5>2010 Census:&nbsp;' + city.lastCensus + '</h5>'+
-			'<h5>Population Change:&nbsp;' + city.change + '</h5>'+
-			'<h5>Population Density:&nbsp;' + city.lastPopDensity + '</h5>'+
-			'<h5>State:&nbsp;' + city.state + '</h5>'+
-			'<h5>Land Area:&nbsp;' + city.landArea + '</h5>'+
+			'<div><strong>Total Population:&nbsp;</strong>'+ city.yearEstimate + '</div>'+
+			'<div><strong>2010 Census:&nbsp;</strong>' + city.lastCensus + '</div>'+
+			'<div><strong>Population Change:&nbsp;</strong>' + city.change + '</div>'+
+			'<div><strong>Population Density:&nbsp;</strong>' + city.lastPopDensity + '</div>'+
+			'<div><strong>State:&nbsp;</strong>' + city.state + '</div>'+
+			'<div><strong>Land Area:&nbsp;</strong>' + city.landArea + '</div>'+
 			'<a href="" ng-click="getDirections('+lat+','+lon+')">Get Directions</a>'+
 			'</div>';
 
