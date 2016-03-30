@@ -16,6 +16,9 @@
         <div id="map"></div>
       </div>
       <div id="side-panel">
+        <div id="directions-panel">
+          <!-- placeholder -->
+        </div>
         <div class="city-row" ng-repeat="city in cities track by $index">
           <h4 class="city-name">{{city.yearRank}}: {{city.city}}</h4>
           <button class="blue-button" ng-click="showInfo($index)">Show Info</button>

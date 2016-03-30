@@ -16,6 +16,7 @@ mapsApp.controller('mapsController', function($scope, $compile){
 	$scope.directionsService = new google.maps.DirectionsService();
 	$scope.directionsDisplay = new google.maps.DirectionsRenderer();
 	$scope.directionsDisplay.setMap($scope.map);
+	$scope.directionsDisplay.setPanel(document.getElementById('directions-panel'));
 
 	function createMarker(city) {
 		var latLon = city.latLon.split(",");
