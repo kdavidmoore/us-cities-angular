@@ -44,11 +44,13 @@ mapsApp.controller('mapsController', function($scope){
 		  infowindow.open($scope.map, marker);
 		});
 
+		// add the current marker to the markers array
 		$scope.markers.push(marker);
 	}
 
 	for (i=0; i<cities.length; i++) {
 		createMarker(cities[i]);
+		// put an event listener on each marker in markers so our showInfo function can see them
 		$scope.markers[i].addListener('click', function() {
 			infowindow.open($scope.map, $scope.markers[i]);
 		});
@@ -57,6 +59,7 @@ mapsApp.controller('mapsController', function($scope){
 	// when a button in the side panel is clicked, showInfo opens the info window
 	$scope.showInfo = function(i){
 		console.log($scope.markers[i]);
+		// trigger the above click event on a marker when a button is clicked
     	google.maps.event.trigger($scope.markers[i], 'click');
   	}
 

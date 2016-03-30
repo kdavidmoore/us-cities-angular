@@ -11,8 +11,10 @@
     <script src="controller.js"></script>
   </head>
   <body ng-controller="mapsController">
-    <div class="container">
-      <div id="map"></div>
+    <div>
+      <div id="map-wrapper">
+        <div id="map"></div>
+      </div>
       <div id="side-panel">
         <div class="row" ng-repeat="city in cities track by $index">
           <p>{{city.yearRank}}: {{city.city}}</p>

@@ -4,9 +4,16 @@ html, body {
   padding: 0;
 }
 
-#map {
+#map-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
   height: 100vh;
   width: 80%;
+}
+
+#map {
+  height: 100%;
 }
 
 #side-panel {
