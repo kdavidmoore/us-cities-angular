@@ -8,6 +8,8 @@ mapsApp.controller('mapsController', function($scope){
 		center: new google.maps.LatLng(40.00, -98.00)
 	});
 
+	$scope.markers = [];
+
 	function createMarker(city) {
 		var latLon = city.latLon.split(",");
 		var lat = latLon[0];
@@ -41,10 +43,21 @@ mapsApp.controller('mapsController', function($scope){
 		marker.addListener('click', function() {
 		  infowindow.open($scope.map, marker);
 		});
+
+		$scope.markers.push(marker);
 	}
 
 	for (i=0; i<cities.length; i++) {
 		createMarker(cities[i]);
+		$scope.markers[i].addListener('click', function() {
+			infowindow.open($scope.map, $scope.markers[i]);
+		});
 	}
+
+	// when a button in the side panel is clicked, showInfo opens the info window
+	$scope.showInfo = function(i){
+		console.log($scope.markers[i]);
+    	google.maps.event.trigger($scope.markers[i], 'click');
+  	}
 
 })
