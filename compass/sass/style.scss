@@ -1,3 +1,8 @@
+$button-color: #039BE5;
+$button-hover-color: #026A9D;
+$button-active-color: #025279;
+$font-color-grey: #757575;
+
 html, body {
   height: 100%;
   margin: 0;
@@ -34,11 +39,12 @@ html, body {
 .city-name {
   width: 100%;
   text-align: left;
+  color: $font-color-grey;
 }
 
 .blue-button {
   width: 120px;
-  background-color: #039BE5;
+  background-color: $button-color;
   color: white;
   border-radius: 2px;
   height: 30px;
@@ -46,14 +52,22 @@ html, body {
   box-shadow: 0 1px 4px rgba(0,0,0,.5);
   outline: none;
   font-size: 12px;
+  text-transform: uppercase;
+  transition: background-color .2s ,box-shadow .2s;
+    transition-property: background-color, box-shadow;
+    transition-duration: 0.2s, 0.2s;
+    transition-timing-function: initial, initial;
+    transition-delay: initial, initial;
 }
 
 .blue-button:hover {
-  background-color: #026A9D;
+  background-color: $button-hover-color;
+  border-color: $button-hover-color;
   box-shadow: 0 2px 8px rgba(0,0,0,.5);
 }
 
 .blue-button:active {
-  background-color: #025279;
+  background-color: $button-active-color;
+  border-color: $button-active-color;
   box-shadow: 0 2px 8px rgba(0,0,0,.5);
 }
