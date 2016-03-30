@@ -10,6 +10,8 @@ mapsApp.controller('mapsController', function($scope){
 
 	$scope.markers = [];
 
+	var infowindow = new google.maps.InfoWindow;
+
 	function createMarker(city) {
 		var latLon = city.latLon.split(",");
 		var lat = latLon[0];
@@ -24,24 +26,24 @@ mapsApp.controller('mapsController', function($scope){
 		});
 
 		var contentString =
-			'<div class="city-info">' +
+			'<div class="city-info">'+
 			'<h1>'+ city.city +'</h1>'+
-			'<p>'+
-			'<strong>Total Population:</strong> '+ city.yearEstimate + '</br>'+
-			'<strong>2010 Census:</strong> ' + city.lastCensus + '</br>'+
-			'<strong>Population Change:</strong> ' + city.change + '</br>'+
-			'<strong>Population Density:</strong> ' + city.lastPopDensity + '</br>'+
-			'<strong>State:</strong> ' + city.state + '</br>'+
-			'<strong>Land Area:</strong> ' + city.landArea +
-			'</p>'+
+			'<h5>Total Population:&nbsp;'+ city.yearEstimate + '</h5>'+
+			'<h5>2010 Census:&nbsp;' + city.lastCensus + '</h5>'+
+			'<h5>Population Change:&nbsp;' + city.change + '</h5>'+
+			'<h5>Population Density:&nbsp;' + city.lastPopDensity + '</h5>'+
+			'<h5>State:&nbsp;' + city.state + '</h5>'+
+			'<h5>Land Area:&nbsp;' + city.landArea + '</h5>'+
+			'<a href="" ng-click="getDirections(city)"><h5>Get Directions</h5></a>'+
 			'</div>';
 
-		var infowindow = new google.maps.InfoWindow({
+		/* var infowindow = new google.maps.InfoWindow({
 			content: contentString
-		});
+		}); */
 
 		marker.addListener('click', function() {
-		  infowindow.open($scope.map, marker);
+			infowindow.setContent(contentString);
+			infowindow.open($scope.map, marker);
 		});
 
 		// add the current marker to the markers array
@@ -56,6 +58,25 @@ mapsApp.controller('mapsController', function($scope){
 	$scope.showInfo = function(i){
 		// trigger the click event on a particular marker when the appropriate side-panel button is clicked
     	google.maps.event.trigger($scope.markers[i], 'click');
+  	}
+
+  	$scope.zoomTo = function(i){
+  		// change center to cities[i].latLong blah blah
+  		// increase zoom to 12ish
+  		var latLon = cities[i].latLon.split(",");
+		var newLat = Number(latLon[0]);
+		var newLon = Number(latLon[1]);
+		// var newCenter = new google.maps.LatLng(newLat, newLon);
+		$scope.map.setCenter({
+			lat : newLat,
+			lng : newLon
+		});
+
+		$scope.map.setZoom(9);
+  	}
+
+  	$scope.getDirections = function(i){
+  		console.log(i);
   	}
 
 })
