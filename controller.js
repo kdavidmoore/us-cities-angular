@@ -47,4 +47,9 @@ mapsApp.controller('mapsController', function($scope){
 		createMarker(cities[i]);
 	}
 
+	function showInfo(i) {
+		console.log($scope.cities[i]);
+	
+	}
+
 })
