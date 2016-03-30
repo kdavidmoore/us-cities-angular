@@ -1,5 +1,5 @@
 var mapsApp = angular.module('mapsApp', []);
-mapsApp.controller('mapsController', function($scope){
+mapsApp.controller('mapsController', function($scope, $compile){
 
 	$scope.cities = cities;
 	
@@ -39,11 +39,13 @@ mapsApp.controller('mapsController', function($scope){
 			'<h5>Population Density:&nbsp;' + city.lastPopDensity + '</h5>'+
 			'<h5>State:&nbsp;' + city.state + '</h5>'+
 			'<h5>Land Area:&nbsp;' + city.landArea + '</h5>'+
-			'<a href="" onclick="getDirections('+lat+','+lon+')">Get Directions</a>'+
+			'<a href="" ng-click="getDirections('+lat+','+lon+')">Get Directions</a>'+
 			'</div>';
 
+		var compiledContent = $compile(contentString)($scope);
+
 		marker.addListener('click', function() {
-			infowindow.setContent(contentString);
+			infowindow.setContent(compiledContent[0]);
 			infowindow.open($scope.map, marker);	
 		});
 
@@ -73,7 +75,7 @@ mapsApp.controller('mapsController', function($scope){
 		$scope.map.setZoom(9);
   	}
 
-  	getDirections = function(lat,lon){
+  	$scope.getDirections = function(lat,lon){
   		var latLon = cities[38].latLon.split(",");
 		var atlLat = latLon[0];
 		var atlLon = latLon[1];
@@ -93,8 +95,5 @@ mapsApp.controller('mapsController', function($scope){
 		  		$scope.directionsDisplay.setDirections(result);
 			}
 		});
-  		
-  		event.preventDefault();
   	}
-
 })
