@@ -12,6 +12,11 @@ mapsApp.controller('mapsController', function($scope){
 
 	var infowindow = new google.maps.InfoWindow;
 
+	// initialize directions service
+	$scope.directionsService = new google.maps.DirectionsService();
+	$scope.directionsDisplay = new google.maps.DirectionsRenderer();
+	$scope.directionsDisplay.setMap($scope.map);
+
 	function createMarker(city) {
 		var latLon = city.latLon.split(",");
 		var lat = latLon[0];
@@ -34,21 +39,17 @@ mapsApp.controller('mapsController', function($scope){
 			'<h5>Population Density:&nbsp;' + city.lastPopDensity + '</h5>'+
 			'<h5>State:&nbsp;' + city.state + '</h5>'+
 			'<h5>Land Area:&nbsp;' + city.landArea + '</h5>'+
-			'<a href="" ng-click="getDirections(city)"><h5>Get Directions</h5></a>'+
+			'<a href="" onclick="getDirections('+lat+','+lon+')">Get Directions</a>'+
 			'</div>';
-
-		/* var infowindow = new google.maps.InfoWindow({
-			content: contentString
-		}); */
 
 		marker.addListener('click', function() {
 			infowindow.setContent(contentString);
-			infowindow.open($scope.map, marker);
+			infowindow.open($scope.map, marker);	
 		});
 
 		// add the current marker to the markers array
 		$scope.markers.push(marker);
-	}
+	} // end createMarker
 
 	// this loop creates a marker for each city by calling createMarker
 	for (i=0; i<cities.length; i++) {
@@ -61,22 +62,39 @@ mapsApp.controller('mapsController', function($scope){
   	}
 
   	$scope.zoomTo = function(i){
-  		// change center to cities[i].latLong blah blah
-  		// increase zoom to 12ish
   		var latLon = cities[i].latLon.split(",");
 		var newLat = Number(latLon[0]);
 		var newLon = Number(latLon[1]);
-		// var newCenter = new google.maps.LatLng(newLat, newLon);
 		$scope.map.setCenter({
-			lat : newLat,
-			lng : newLon
+			lat: newLat,
+			lng: newLon
 		});
 
 		$scope.map.setZoom(9);
   	}
 
-  	$scope.getDirections = function(i){
-  		console.log(i);
+  	getDirections = function(lat,lon){
+  		var latLon = cities[38].latLon.split(",");
+		var atlLat = latLon[0];
+		var atlLon = latLon[1];
+		var start = new google.maps.LatLng(atlLat, atlLon);
+  		var end = new google.maps.LatLng(lat, lon);
+	
+  		var request = {
+    		origin: start,
+    		destination: end,
+    		travelMode: google.maps.TravelMode.DRIVING
+  		};
+  		
+  		infowindow.close();
+
+  		$scope.directionsService.route(request, function(result, status) {
+			if (status == google.maps.DirectionsStatus.OK) {
+		  		$scope.directionsDisplay.setDirections(result);
+			}
+		});
+  		
+  		event.preventDefault();
   	}
 
 })
