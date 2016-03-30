@@ -1,0 +1,59 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 80%;
+}
+
+#map {
+  height: 100%;
+}
+
+#side-panel {
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.city-row {
+  width: 100%;
+  text-align: center;
+}
+
+.city-name {
+  width: 100%;
+  text-align: left;
+}
+
+.blue-button {
+  width: 120px;
+  background-color: #039BE5;
+  color: white;
+  border-radius: 2px;
+  height: 30px;
+  border: 1px solid #0395DF;
+  box-shadow: 0 1px 4px rgba(0,0,0,.5);
+  outline: none;
+  font-size: 12px;
+}
+
+.blue-button:hover {
+  background-color: #026A9D;
+  box-shadow: 0 2px 8px rgba(0,0,0,.5);
+}
+
+.blue-button:active {
+  background-color: #025279;
+  box-shadow: 0 2px 8px rgba(0,0,0,.5);
+}
