@@ -11,7 +11,7 @@ html, body {
   top: 0;
   left: 0;
   height: 100vh;
-  width: 80%;
+  width: 70%;
 }
 
 /* line 20, ../compass/sass/style.scss */
@@ -21,29 +21,34 @@ html, body {
 
 /* line 24, ../compass/sass/style.scss */
 #side-panel {
+  width: 30%;
   font-family: Arial, Helvetica, sans-serif;
   position: absolute;
   top: 0;
   right: 0;
-  width: 20%;
   box-sizing: border-box;
   padding: 10px;
 }
 
 /* line 34, ../compass/sass/style.scss */
+#directions-panel {
+  width: 100%;
+}
+
+/* line 38, ../compass/sass/style.scss */
 .city-row {
   width: 100%;
   text-align: center;
 }
 
-/* line 39, ../compass/sass/style.scss */
+/* line 43, ../compass/sass/style.scss */
 .city-name {
   width: 100%;
   text-align: left;
   color: #757575;
 }
 
-/* line 45, ../compass/sass/style.scss */
+/* line 49, ../compass/sass/style.scss */
 .blue-button {
   width: 120px;
   background-color: #039BE5;
@@ -62,16 +67,32 @@ html, body {
   transition-delay: initial, initial;
 }
 
-/* line 63, ../compass/sass/style.scss */
+/* line 67, ../compass/sass/style.scss */
 .blue-button:hover {
   background-color: #026A9D;
   border-color: #026A9D;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* line 69, ../compass/sass/style.scss */
+/* line 73, ../compass/sass/style.scss */
 .blue-button:active {
   background-color: #025279;
   border-color: #025279;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 1279px) {
+  /* line 80, ../compass/sass/style.scss */
+  #map-wrapper {
+    width: 100%;
+    height: 70vh;
+    position: static;
+  }
+
+  /* line 85, ../compass/sass/style.scss */
+  #side-panel {
+    width: 100%;
+    bottom: 0;
+    position: static;
+  }
 }

@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Info windows</title>
+    <title>US Cities App</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIEKQEQmbOz2q9VEINcWWO15WMS5kcoIU"></script>
@@ -16,9 +16,13 @@
         <div id="map"></div>
       </div>
       <div id="side-panel">
+        <div id="directions-panel">
+          <!-- placeholder -->
+        </div>
         <div class="city-row" ng-repeat="city in cities track by $index">
           <h4 class="city-name">{{city.yearRank}}: {{city.city}}</h4>
           <button class="blue-button" ng-click="showInfo($index)">Show Info</button>
+          <button class="blue-button" ng-click="zoomTo($index)">Zoom To</button>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 var mapsApp = angular.module('mapsApp', []);
-mapsApp.controller('mapsController', function($scope){
+mapsApp.controller('mapsController', function($scope, $compile){
 
 	$scope.cities = cities;
 	
@@ -9,6 +9,14 @@ mapsApp.controller('mapsController', function($scope){
 	});
 
 	$scope.markers = [];
+
+	var infowindow = new google.maps.InfoWindow;
+
+	// initialize directions service
+	$scope.directionsService = new google.maps.DirectionsService();
+	$scope.directionsDisplay = new google.maps.DirectionsRenderer();
+	$scope.directionsDisplay.setMap($scope.map);
+	$scope.directionsDisplay.setPanel(document.getElementById('directions-panel'));
 
 	function createMarker(city) {
 		var latLon = city.latLon.split(",");
@@ -24,29 +32,27 @@ mapsApp.controller('mapsController', function($scope){
 		});
 
 		var contentString =
-			'<div class="city-info">' +
+			'<div class="city-info">'+
 			'<h1>'+ city.city +'</h1>'+
-			'<p>'+
-			'<strong>Total Population:</strong> '+ city.yearEstimate + '</br>'+
-			'<strong>2010 Census:</strong> ' + city.lastCensus + '</br>'+
-			'<strong>Population Change:</strong> ' + city.change + '</br>'+
-			'<strong>Population Density:</strong> ' + city.lastPopDensity + '</br>'+
-			'<strong>State:</strong> ' + city.state + '</br>'+
-			'<strong>Land Area:</strong> ' + city.landArea +
-			'</p>'+
+			'<div><strong>Total Population:&nbsp;</strong>'+ city.yearEstimate + '</div>'+
+			'<div><strong>2010 Census:&nbsp;</strong>' + city.lastCensus + '</div>'+
+			'<div><strong>Population Change:&nbsp;</strong>' + city.change + '</div>'+
+			'<div><strong>Population Density:&nbsp;</strong>' + city.lastPopDensity + '</div>'+
+			'<div><strong>State:&nbsp;</strong>' + city.state + '</div>'+
+			'<div><strong>Land Area:&nbsp;</strong>' + city.landArea + '</div>'+
+			'<a href="" ng-click="getDirections('+lat+','+lon+')">Get Directions</a>'+
 			'</div>';
 
-		var infowindow = new google.maps.InfoWindow({
-			content: contentString
-		});
+		var compiledContent = $compile(contentString)($scope);
 
 		marker.addListener('click', function() {
-		  infowindow.open($scope.map, marker);
+			infowindow.setContent(compiledContent[0]);
+			infowindow.open($scope.map, marker);	
 		});
 
 		// add the current marker to the markers array
 		$scope.markers.push(marker);
-	}
+	} // end createMarker
 
 	// this loop creates a marker for each city by calling createMarker
 	for (i=0; i<cities.length; i++) {
@@ -58,4 +64,37 @@ mapsApp.controller('mapsController', function($scope){
     	google.maps.event.trigger($scope.markers[i], 'click');
   	}
 
+  	$scope.zoomTo = function(i){
+  		var latLon = cities[i].latLon.split(",");
+		var newLat = Number(latLon[0]);
+		var newLon = Number(latLon[1]);
+		$scope.map.setCenter({
+			lat: newLat,
+			lng: newLon
+		});
+
+		$scope.map.setZoom(9);
+  	}
+
+  	$scope.getDirections = function(lat,lon){
+  		var latLon = cities[38].latLon.split(",");
+		var atlLat = latLon[0];
+		var atlLon = latLon[1];
+		var start = new google.maps.LatLng(atlLat, atlLon);
+  		var end = new google.maps.LatLng(lat, lon);
+	
+  		var request = {
+    		origin: start,
+    		destination: end,
+    		travelMode: google.maps.TravelMode.DRIVING
+  		};
+  		
+  		infowindow.close();
+
+  		$scope.directionsService.route(request, function(result, status) {
+			if (status == google.maps.DirectionsStatus.OK) {
+		  		$scope.directionsDisplay.setDirections(result);
+			}
+		});
+  	}
 })
