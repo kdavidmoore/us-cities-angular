@@ -12,6 +12,9 @@ mapsApp.controller('mapsController', function($scope, $compile){
 
 	var infowindow = new google.maps.InfoWindow;
 
+	// initialize places service
+	var service = new google.maps.places.PlacesService($scope.map);
+
 	// initialize directions service
 	$scope.directionsService = new google.maps.DirectionsService();
 	$scope.directionsDisplay = new google.maps.DirectionsRenderer();
@@ -68,13 +71,37 @@ mapsApp.controller('mapsController', function($scope, $compile){
   		var latLon = cities[i].latLon.split(",");
 		var newLat = Number(latLon[0]);
 		var newLon = Number(latLon[1]);
-		$scope.map.setCenter({
-			lat: newLat,
-			lng: newLon
-		});
+		var newLocation = new google.maps.LatLng(newLat, newLon);
+		$scope.map.setCenter({lat: newLat, lng: newLon});
+		$scope.map.setZoom(11);
+		service.nearbySearch({
+          	location: newLocation,
+          	radius: 10000,
+          	type: ['pet_store']
+        }, callback);
+    }
 
-		$scope.map.setZoom(9);
-  	}
+    function callback(results, status) {
+		if (status == google.maps.places.PlacesServiceStatus.OK) {
+			for (var i = 0; i < results.length; i++) {
+				var place = results[i];
+				createSearchMarker(results[i]);
+			}
+		}
+	}
+
+	function createSearchMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: $scope.map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open($scope.map, this);
+        });
+    }
 
   	$scope.getDirections = function(lat,lon){
   		var latLon = cities[38].latLon.split(",");
