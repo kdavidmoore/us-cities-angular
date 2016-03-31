@@ -3,10 +3,16 @@ $button-hover-color: #026A9D;
 $button-active-color: #025279;
 $font-color-grey: #757575;
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+body {
+  line-height: 1.2em;
+}
+
+#what-is {
+  color: $font-color-grey;
+  font-size: 1.3em;
+  font-weight: bold;
+  line-height: 1.3em;
+  text-align: center;
 }
 
 #map-wrapper {
@@ -38,12 +44,14 @@ html, body {
 .city-row {
   width: 100%;
   text-align: center;
+  padding-bottom: 10px;
 }
 
 .city-name {
   width: 100%;
   text-align: left;
   color: $font-color-grey;
+  line-height: 1.5em;
 }
 
 .blue-button {
@@ -76,6 +84,20 @@ html, body {
   box-shadow: 0 2px 8px rgba(0,0,0,.5);
 }
 
+.city-header {
+  font-size: 1.8em;
+  font-weight: bold;
+  line-height: 1.5em;
+}
+
+.city-info span {
+  font-weight: bold;
+}
+
+.city-info a:link, .city-info a:visited {
+  color: #0000EE;
+}
+
 @media screen and (max-width: 1024px) {
   #map-wrapper {
     width: 100%;
@@ -86,5 +108,8 @@ html, body {
     width: 100%;
     bottom: 0;
     position: static;
+  }
+  .city-name {
+  text-align: center;
   }
 }

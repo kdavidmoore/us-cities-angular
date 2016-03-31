@@ -1,11 +1,18 @@
 /* line 6, ../compass/sass/style.scss */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+body {
+  line-height: 1.2em;
 }
 
-/* line 12, ../compass/sass/style.scss */
+/* line 10, ../compass/sass/style.scss */
+#what-is {
+  color: #757575;
+  font-size: 1.3em;
+  font-weight: bold;
+  line-height: 1.3em;
+  text-align: center;
+}
+
+/* line 18, ../compass/sass/style.scss */
 #map-wrapper {
   position: fixed;
   top: 0;
@@ -14,12 +21,12 @@ html, body {
   width: 70%;
 }
 
-/* line 20, ../compass/sass/style.scss */
+/* line 26, ../compass/sass/style.scss */
 #map {
   height: 100%;
 }
 
-/* line 24, ../compass/sass/style.scss */
+/* line 30, ../compass/sass/style.scss */
 #side-panel {
   width: 30%;
   font-family: Arial, Helvetica, sans-serif;
@@ -30,25 +37,27 @@ html, body {
   padding: 10px;
 }
 
-/* line 34, ../compass/sass/style.scss */
+/* line 40, ../compass/sass/style.scss */
 #directions-panel {
   width: 100%;
 }
 
-/* line 38, ../compass/sass/style.scss */
+/* line 44, ../compass/sass/style.scss */
 .city-row {
   width: 100%;
   text-align: center;
+  padding-bottom: 10px;
 }
 
-/* line 43, ../compass/sass/style.scss */
+/* line 50, ../compass/sass/style.scss */
 .city-name {
   width: 100%;
   text-align: left;
   color: #757575;
+  line-height: 1.5em;
 }
 
-/* line 49, ../compass/sass/style.scss */
+/* line 57, ../compass/sass/style.scss */
 .blue-button {
   width: 120px;
   background-color: #039BE5;
@@ -67,32 +76,54 @@ html, body {
   transition-delay: initial, initial;
 }
 
-/* line 67, ../compass/sass/style.scss */
+/* line 75, ../compass/sass/style.scss */
 .blue-button:hover {
   background-color: #026A9D;
   border-color: #026A9D;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* line 73, ../compass/sass/style.scss */
+/* line 81, ../compass/sass/style.scss */
 .blue-button:active {
   background-color: #025279;
   border-color: #025279;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
+/* line 87, ../compass/sass/style.scss */
+.city-header {
+  font-size: 1.8em;
+  font-weight: bold;
+  line-height: 1.5em;
+}
+
+/* line 93, ../compass/sass/style.scss */
+.city-info span {
+  font-weight: bold;
+}
+
+/* line 97, ../compass/sass/style.scss */
+.city-info a:link, .city-info a:visited {
+  color: #0000EE;
+}
+
 @media screen and (max-width: 1024px) {
-  /* line 80, ../compass/sass/style.scss */
+  /* line 102, ../compass/sass/style.scss */
   #map-wrapper {
     width: 100%;
     height: 70vh;
     position: static;
   }
 
-  /* line 85, ../compass/sass/style.scss */
+  /* line 107, ../compass/sass/style.scss */
   #side-panel {
     width: 100%;
     bottom: 0;
     position: static;
+  }
+
+  /* line 112, ../compass/sass/style.scss */
+  .city-name {
+    text-align: center;
   }
 }
