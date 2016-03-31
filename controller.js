@@ -2,6 +2,19 @@ var mapsApp = angular.module('mapsApp', []);
 mapsApp.controller('mapsController', function($scope, $compile){
 
 	$scope.cities = cities;
+  	/* $scope.searchItems = [
+  	{
+		id: 0,
+		label: 'Pet Stores',
+		type: 'pet_store'
+	},
+	{
+		id: 1,
+		label: 'Liquor Stores',
+		type: 'liquor_store'
+	}];
+	//$scope.selected = $scope.searchItems[0]; */
+	var placeTypes = [ 'pet_store', 'liquor_store' ];
 	
 	$scope.map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 4,
@@ -68,6 +81,10 @@ mapsApp.controller('mapsController', function($scope, $compile){
   	}
 
   	$scope.zoomTo = function(i){
+		var myType = document.getElementById('search-for').value;
+		if (myType == '') {
+			return;
+		}
   		var latLon = cities[i].latLon.split(",");
 		var newLat = Number(latLon[0]);
 		var newLon = Number(latLon[1]);
@@ -77,7 +94,7 @@ mapsApp.controller('mapsController', function($scope, $compile){
 		service.nearbySearch({
           	location: newLocation,
           	radius: 10000,
-          	type: ['pet_store']
+          	type: [placeTypes[myType]]
         }, callback);
     }
 
@@ -124,4 +141,5 @@ mapsApp.controller('mapsController', function($scope, $compile){
 			}
 		});
   	}
+
 })
