@@ -1,18 +1,7 @@
-$button-color: #039BE5;
-$button-hover-color: #026A9D;
-$button-active-color: #025279;
-$font-color-grey: #757575;
+@import "vars";
 
 body {
   line-height: 1.2em;
-}
-
-#what-is {
-  color: $font-color-grey;
-  font-size: 1.3em;
-  font-weight: bold;
-  line-height: 1.3em;
-  text-align: center;
 }
 
 #map-wrapper {
@@ -21,10 +10,9 @@ body {
   left: 0;
   height: 100vh;
   width: 70%;
-}
-
-#map {
-  height: 100%;
+  #map {
+    height: 100%;
+  }
 }
 
 #side-panel {
@@ -35,67 +23,68 @@ body {
   right: 0;
   box-sizing: border-box;
   padding: 10px;
+  #what-is {
+    color: $font-color-grey;
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 1.3em;
+    text-align: center;
+  }
+  #directions-panel {
+    width: 100%;
+  }
+  .city-row {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;  
+    .city-name {
+      width: 100%;
+      text-align: left;
+      color: $font-color-grey;
+      line-height: 1.5em;
+    }
+    .blue-button {
+      width: 120px;
+      background-color: $button-color;
+      color: white;
+      border-radius: 2px;
+      height: 30px;
+      border: 1px solid #0395DF;
+      box-shadow: 0 1px 4px rgba(0,0,0,.5);
+      outline: none;
+      font-size: 12px;
+      text-transform: uppercase;
+      transition: background-color .2s ,box-shadow .2s;
+        transition-property: background-color, box-shadow;
+        transition-duration: 0.2s, 0.2s;
+        transition-timing-function: initial, initial;
+        transition-delay: initial, initial;
+    }
+    .blue-button:hover {
+      background-color: $button-hover-color;
+      border-color: $button-hover-color;
+      box-shadow: 0 2px 8px rgba(0,0,0,.5);
+    }
+    .blue-button:active {
+      background-color: $button-active-color;
+      border-color: $button-active-color;
+      box-shadow: 0 2px 8px rgba(0,0,0,.5);
+    }
+  }
 }
 
-#directions-panel {
-  width: 100%;
-}
-
-.city-row {
-  width: 100%;
-  text-align: center;
-  padding-bottom: 10px;
-}
-
-.city-name {
-  width: 100%;
-  text-align: left;
-  color: $font-color-grey;
-  line-height: 1.5em;
-}
-
-.blue-button {
-  width: 120px;
-  background-color: $button-color;
-  color: white;
-  border-radius: 2px;
-  height: 30px;
-  border: 1px solid #0395DF;
-  box-shadow: 0 1px 4px rgba(0,0,0,.5);
-  outline: none;
-  font-size: 12px;
-  text-transform: uppercase;
-  transition: background-color .2s ,box-shadow .2s;
-    transition-property: background-color, box-shadow;
-    transition-duration: 0.2s, 0.2s;
-    transition-timing-function: initial, initial;
-    transition-delay: initial, initial;
-}
-
-.blue-button:hover {
-  background-color: $button-hover-color;
-  border-color: $button-hover-color;
-  box-shadow: 0 2px 8px rgba(0,0,0,.5);
-}
-
-.blue-button:active {
-  background-color: $button-active-color;
-  border-color: $button-active-color;
-  box-shadow: 0 2px 8px rgba(0,0,0,.5);
-}
-
-.city-header {
-  font-size: 1.8em;
-  font-weight: bold;
-  line-height: 1.5em;
-}
-
-.city-info span {
-  font-weight: bold;
-}
-
-.city-info a:link, .city-info a:visited {
-  color: #0000EE;
+.city-info {
+  .city-header {
+    font-size: 1.8em;
+    font-weight: bold;
+    line-height: 1.5em;
+  }
+  .span {
+    font-weight: bold;
+  }
+  a:link, a:visited {
+    color: #0000EE;
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -108,8 +97,8 @@ body {
     width: 100%;
     bottom: 0;
     position: static;
-  }
-  .city-name {
-  text-align: center;
-  }
+    .city-name {
+      text-align: center;
+    }
+  } 
 }

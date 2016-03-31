@@ -1,18 +1,9 @@
-/* line 6, ../compass/sass/style.scss */
+/* line 3, ../compass/sass/style.scss */
 body {
   line-height: 1.2em;
 }
 
-/* line 10, ../compass/sass/style.scss */
-#what-is {
-  color: #757575;
-  font-size: 1.3em;
-  font-weight: bold;
-  line-height: 1.3em;
-  text-align: center;
-}
-
-/* line 18, ../compass/sass/style.scss */
+/* line 7, ../compass/sass/style.scss */
 #map-wrapper {
   position: fixed;
   top: 0;
@@ -20,13 +11,12 @@ body {
   height: 100vh;
   width: 70%;
 }
-
-/* line 26, ../compass/sass/style.scss */
-#map {
+/* line 13, ../compass/sass/style.scss */
+#map-wrapper #map {
   height: 100%;
 }
 
-/* line 30, ../compass/sass/style.scss */
+/* line 18, ../compass/sass/style.scss */
 #side-panel {
   width: 30%;
   font-family: Arial, Helvetica, sans-serif;
@@ -36,29 +26,33 @@ body {
   box-sizing: border-box;
   padding: 10px;
 }
-
-/* line 40, ../compass/sass/style.scss */
-#directions-panel {
+/* line 26, ../compass/sass/style.scss */
+#side-panel #what-is {
+  color: #757575;
+  font-size: 1.3em;
+  font-weight: bold;
+  line-height: 1.3em;
+  text-align: center;
+}
+/* line 33, ../compass/sass/style.scss */
+#side-panel #directions-panel {
   width: 100%;
 }
-
-/* line 44, ../compass/sass/style.scss */
-.city-row {
+/* line 36, ../compass/sass/style.scss */
+#side-panel .city-row {
   width: 100%;
   text-align: center;
   padding-bottom: 10px;
 }
-
-/* line 50, ../compass/sass/style.scss */
-.city-name {
+/* line 40, ../compass/sass/style.scss */
+#side-panel .city-row .city-name {
   width: 100%;
   text-align: left;
   color: #757575;
   line-height: 1.5em;
 }
-
-/* line 57, ../compass/sass/style.scss */
-.blue-button {
+/* line 46, ../compass/sass/style.scss */
+#side-panel .city-row .blue-button {
   width: 120px;
   background-color: #039BE5;
   color: white;
@@ -75,55 +69,50 @@ body {
   transition-timing-function: initial, initial;
   transition-delay: initial, initial;
 }
-
-/* line 75, ../compass/sass/style.scss */
-.blue-button:hover {
+/* line 63, ../compass/sass/style.scss */
+#side-panel .city-row .blue-button:hover {
   background-color: #026A9D;
   border-color: #026A9D;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
-
-/* line 81, ../compass/sass/style.scss */
-.blue-button:active {
+/* line 68, ../compass/sass/style.scss */
+#side-panel .city-row .blue-button:active {
   background-color: #025279;
   border-color: #025279;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* line 87, ../compass/sass/style.scss */
-.city-header {
+/* line 77, ../compass/sass/style.scss */
+.city-info .city-header {
   font-size: 1.8em;
   font-weight: bold;
   line-height: 1.5em;
 }
-
-/* line 93, ../compass/sass/style.scss */
-.city-info span {
+/* line 82, ../compass/sass/style.scss */
+.city-info .span {
   font-weight: bold;
 }
-
-/* line 97, ../compass/sass/style.scss */
+/* line 85, ../compass/sass/style.scss */
 .city-info a:link, .city-info a:visited {
   color: #0000EE;
 }
 
 @media screen and (max-width: 1024px) {
-  /* line 102, ../compass/sass/style.scss */
+  /* line 91, ../compass/sass/style.scss */
   #map-wrapper {
     width: 100%;
     height: 70vh;
     position: static;
   }
 
-  /* line 107, ../compass/sass/style.scss */
+  /* line 96, ../compass/sass/style.scss */
   #side-panel {
     width: 100%;
     bottom: 0;
     position: static;
   }
-
-  /* line 112, ../compass/sass/style.scss */
-  .city-name {
+  /* line 100, ../compass/sass/style.scss */
+  #side-panel .city-name {
     text-align: center;
   }
 }
