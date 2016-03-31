@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Do You Know Where the Pet Store Is?</title>
+    <title>Find Things in Your Area</title>
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
@@ -20,16 +20,19 @@
         <div id="directions-panel">
           <!-- placeholder -->
         </div>
-        <div>
-          <h1 id="what-is">US Cities by Population Rank</h1>
+        <div id="side-top-wrapper">
+          <input id="filter-input" class="controls" type="text" ng-model="filterStr" placeholder="Find your city">
+           <h1 id="what-is">US Cities by Population Rank</h1>
         </div>
-        <div class="city-row" ng-repeat="city in cities track by $index">
+        <div class="city-row" ng-repeat="city in (filteredCities = (cities | filter: filterStr)) track by $index">
           <h4 class="city-name">{{city.yearRank}}: {{city.city}}</h4>
           <!-- <button class="blue-button" ng-click="showInfo($index)">Show Info</button> -->
           <select class="search-for blue-button">
             <option value="">Search for&hellip;</option>
             <option value="0">Pet Stores</option>
             <option value="1">Liquor Stores</option>
+            <option value="2">Pharmacies</option>
+            <option value="3">Lawyers</option>
           </select>
           <button class="blue-button" ng-click="zoomTo($index)">Find</button>
         </div>

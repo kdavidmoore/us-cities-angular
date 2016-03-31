@@ -1,12 +1,21 @@
 var mapsApp = angular.module('mapsApp', []);
+
 mapsApp.controller('mapsController', function($scope, $compile){
 
 	$scope.cities = cities;
-	var placeTypes = [ 'pet_store', 'liquor_store' ]
+  
+	var placeTypes = [ 'pet_store', 'liquor_store', 'pharmacy', 'lawyer' ]
 	$scope.map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 4,
 		center: new google.maps.LatLng(40.00, -98.00)
 	});
+
+	// initialize autocomplete stuff
+	var filterInput =  /** @type {!HTMLInputElement} */(
+		document.getElementById('filter-input'));
+	var autocomplete = new google.maps.places.Autocomplete(filterInput);
+	autocomplete.bindTo('bounds', $scope.map);
+	// end autocomplete initialization
 
 	$scope.markers = [];
 	var searchMarkers = [];
@@ -63,10 +72,20 @@ mapsApp.controller('mapsController', function($scope, $compile){
 		createMarker(cities[i]);
 	}
 
-	$scope.showInfo = function(i){
+	// add a listener to the autocomplete
+	autocomplete.addListener('place_changed', function() {
+	    infowindow.close();
+	    var place = autocomplete.getPlace();
+	    if (!place.geometry) {
+	      window.alert("Autocomplete's returned place contains no geometry");
+	      return;
+	    }
+	});
+
+	/* $scope.showInfo = function(i){
 		// trigger the click event on a particular marker when the appropriate side-panel button is clicked
     	google.maps.event.trigger($scope.markers[i], 'click');
-  	}
+  	} */
 
   	$scope.zoomTo = function(i){
 		var myForms = document.getElementsByClassName('search-for');

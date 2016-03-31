@@ -23,12 +23,21 @@ body {
   right: 0;
   box-sizing: border-box;
   padding: 10px;
-  #what-is {
-    color: $font-color-grey;
-    font-size: 1.3em;
-    font-weight: bold;
-    line-height: 1.3em;
+  #side-top-wrapper {
     text-align: center;
+    #filter-input {
+      font-size: 1.1em;
+      line-height: 1.2em;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    #what-is {
+      color: $font-color-grey;
+      font-size: 1.3em;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+    }
   }
   #directions-panel {
     width: 100%;
@@ -41,7 +50,7 @@ body {
       width: 100%;
       text-align: left;
       color: $font-color-grey;
-      line-height: 1.5em;
+      margin-bottom: 10px;
     }
     .blue-button {
       width: 120px;
