@@ -69,7 +69,9 @@ mapsApp.controller('mapsController', function($scope, $compile){
   	}
 
   	$scope.zoomTo = function(i){
-		var myType = document.getElementById('search-for').value;
+		var myForms = document.getElementsByClassName('search-for');
+		var myType = myForms[i].value;
+		console.dir(myForms);
 		if (myType == '') {
 			return;
 		}
