@@ -2,26 +2,14 @@ var mapsApp = angular.module('mapsApp', []);
 mapsApp.controller('mapsController', function($scope, $compile){
 
 	$scope.cities = cities;
-  	/* $scope.searchItems = [
-  	{
-		id: 0,
-		label: 'Pet Stores',
-		type: 'pet_store'
-	},
-	{
-		id: 1,
-		label: 'Liquor Stores',
-		type: 'liquor_store'
-	}];
-	//$scope.selected = $scope.searchItems[0]; */
-	var placeTypes = [ 'pet_store', 'liquor_store' ];
-	
+	var placeTypes = [ 'pet_store', 'liquor_store' ]
 	$scope.map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 4,
 		center: new google.maps.LatLng(40.00, -98.00)
 	});
 
 	$scope.markers = [];
+	var searchMarkers = [];
 
 	var infowindow = new google.maps.InfoWindow;
 
@@ -100,6 +88,7 @@ mapsApp.controller('mapsController', function($scope, $compile){
 
     function callback(results, status) {
 		if (status == google.maps.places.PlacesServiceStatus.OK) {
+			clearMarkers();
 			for (var i = 0; i < results.length; i++) {
 				var place = results[i];
 				createSearchMarker(results[i]);
@@ -113,11 +102,19 @@ mapsApp.controller('mapsController', function($scope, $compile){
           map: $scope.map,
           position: place.geometry.location
         });
+        searchMarkers.push(marker);
 
         google.maps.event.addListener(marker, 'click', function() {
           infowindow.setContent(place.name);
           infowindow.open($scope.map, this);
         });
+    }
+
+    function clearMarkers() {
+    	for (var i=0; i<searchMarkers.length; i++) {
+    		searchMarkers[i].setMap(null);
+  		}	
+  		searchMarkers = [];
     }
 
   	$scope.getDirections = function(lat,lon){
