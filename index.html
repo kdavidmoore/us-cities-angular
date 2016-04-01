@@ -6,42 +6,17 @@
     <title>Find Things in Your Area</title>
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/angular-animate.min.js"></script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIEKQEQmbOz2q9VEINcWWO15WMS5kcoIU&libraries=places"></script>
-    <script src="cities.js"></script>
-    <script src="placetypes.js"></script>
-    <script src="controller.js"></script>
+    <script src="js/cities.js"></script>
+    <script src="js/placetypes.js"></script>
+    <script src="js/mainController.js"></script>
   </head>
   <body ng-controller="mapsController">
-    <div>
-      <div id="map-wrapper">
-        <div id="map"></div>
-      </div>
-      <div id="side-panel">
-        <div id="directions-panel">
-          <!-- placeholder -->
-        </div>
-        <div id="side-top-wrapper">
-          <input id="filter-input" class="controls" type="text" ng-model="filterStr" placeholder="Find your city">
-          <button class="red-button" ng-click="resetMap()">Reset</button>
-           <h1 id="what-is">US Cities by Population Rank</h1>
-        </div>
-        <div class="city-row" ng-repeat="city in filteredCities = (cities | filter:filterStr) track by city.yearRank">
-          <h4 class="city-name">{{city.yearRank}}: {{city.city}}</h4>
-          <button class="blue-button med-button" ng-click="showInfo(city.yearRank)">Show Info</button>
-          <!-- <select ng-model="" class="search-for blue-button">
-            <option value="">Search for&hellip;</option>
-            <option value="0">Pet Stores</option>
-            <option value="1">Liquor Stores</option>
-            <option value="2">Pharmacies</option>
-            <option value="3">Lawyers</option>
-          </select> -->
-          <select class="search-for blue-button" ng-model="city.place" ng-options="value as value.label for value in placeTypes">
-            <!-- <option>Find a&ellip;</option> -->
-          </select>
-          <button class="blue-button small-button" ng-click="zoomTo(city.yearRank)">Find</button>
-        </div>
-      </div>
+    <div ng-view>
+      <!-- front goes here -->
     </div>
   </body>
 </html>

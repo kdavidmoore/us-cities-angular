@@ -1,10 +1,24 @@
-var mapsApp = angular.module('mapsApp', []);
+var mapsApp = angular.module('mapsApp', ['ngRoute']);
+
+mapsApp.config(function($routeProvider){
+	$routeProvider.when('/',{
+		templateUrl: 'pages/front.html',
+		controller: 'mapsController'
+	});
+	$routeProvider.when('/zoom',{
+		templateUrl: 'pages/zoom.html',
+		controller: 'zoomController'
+	});
+	// send the user back to the home page if the route is not valid
+	$routeProvider.otherwise({
+		templateUrl: 'pages/front.html',
+		controller: 'mapsController'
+	});
+})
 
 mapsApp.controller('mapsController', function($scope, $compile){
 	// variable declarations
-	//var myForms = document.getElementsByClassName('search-for');
 	var kansas = new google.maps.LatLng(40.00, -98.00);
-	//var placeTypes = [ 'pet_store', 'liquor_store', 'pharmacy', 'lawyer' ];
 	$scope.markers = [];
 	var searchMarkers = [];
 	$scope.cities = cities;
@@ -100,8 +114,6 @@ mapsApp.controller('mapsController', function($scope, $compile){
   		var j = Number(i)-1;
   		console.log(j);
   		myType = $scope.cities[j].place.type;
-		//myForms[j] = document.getElementsByClassName('search-for')[j];
-		//var myType = myForms[j].value;
   		var latLon = cities[j].latLon.split(",");
 		var newLat = Number(latLon[0]);
 		var newLon = Number(latLon[1]);
