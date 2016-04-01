@@ -22,11 +22,12 @@
         </div>
         <div id="side-top-wrapper">
           <input id="filter-input" class="controls" type="text" ng-model="filterStr" placeholder="Find your city">
+          <button class="red-button" ng-click="resetMap()">Reset</button>
            <h1 id="what-is">US Cities by Population Rank</h1>
         </div>
         <div class="city-row" ng-repeat="city in (filteredCities = (cities | filter: filterStr)) track by $index">
           <h4 class="city-name">{{city.yearRank}}: {{city.city}}</h4>
-          <!-- <button class="blue-button" ng-click="showInfo($index)">Show Info</button> -->
+          <button class="blue-button med-button" ng-click="showInfo($index)">Show Info</button>
           <select class="search-for blue-button">
             <option value="">Search for&hellip;</option>
             <option value="0">Pet Stores</option>
@@ -34,7 +35,7 @@
             <option value="2">Pharmacies</option>
             <option value="3">Lawyers</option>
           </select>
-          <button class="blue-button" ng-click="zoomTo($index)">Find</button>
+          <button class="blue-button small-button" ng-click="zoomTo($index)">Find</button>
         </div>
       </div>
     </div>

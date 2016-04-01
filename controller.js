@@ -1,13 +1,13 @@
 var mapsApp = angular.module('mapsApp', []);
 
 mapsApp.controller('mapsController', function($scope, $compile){
-
+	var kansas = new google.maps.LatLng(40.00, -98.00);
 	$scope.cities = cities;
   
 	var placeTypes = [ 'pet_store', 'liquor_store', 'pharmacy', 'lawyer' ]
 	$scope.map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 4,
-		center: new google.maps.LatLng(40.00, -98.00)
+		center: kansas
 	});
 
 	// initialize autocomplete stuff
@@ -82,10 +82,10 @@ mapsApp.controller('mapsController', function($scope, $compile){
 	    }
 	});
 
-	/* $scope.showInfo = function(i){
+	$scope.showInfo = function(i){
 		// trigger the click event on a particular marker when the appropriate side-panel button is clicked
     	google.maps.event.trigger($scope.markers[i], 'click');
-  	} */
+  	}
 
   	$scope.zoomTo = function(i){
 		var myForms = document.getElementsByClassName('search-for');
@@ -158,6 +158,13 @@ mapsApp.controller('mapsController', function($scope, $compile){
 		  		$scope.directionsDisplay.setDirections(result);
 			}
 		});
+  	}
+
+  	$scope.resetMap = function() {
+  		clearMarkers();
+  		$scope.directionsDisplay.set('directions', null);
+		$scope.map.setCenter(kansas);
+		$scope.map.setZoom(4);
   	}
 
 })
