@@ -1,9 +1,5 @@
 var mapsApp = angular.module('mapsApp', []);
 
-/* function selectCtrl($scope) {
-	
-} */
-
 mapsApp.controller('mapsController', function($scope, $compile){
 	// variable declarations
 	//var myForms = document.getElementsByClassName('search-for');
@@ -17,11 +13,8 @@ mapsApp.controller('mapsController', function($scope, $compile){
 	$scope.directionsDisplay;
 	var placesService;
 	var infowindow;
-
 	$scope.placeTypes = placeTypes;
-	$scope.selectAction = function() {
-		console.log($scope.myOption);
-	}
+	var myType = '';
 
 	function initMap() {
 		$scope.map = new google.maps.Map(document.getElementById('map'), {
@@ -106,6 +99,7 @@ mapsApp.controller('mapsController', function($scope, $compile){
   		infowindow.close();
   		var j = Number(i)-1;
   		console.log(j);
+  		myType = $scope.cities[j].place.type;
 		//myForms[j] = document.getElementsByClassName('search-for')[j];
 		//var myType = myForms[j].value;
   		var latLon = cities[j].latLon.split(",");
@@ -117,7 +111,7 @@ mapsApp.controller('mapsController', function($scope, $compile){
 		placesService.nearbySearch({
           	location: newLocation,
           	radius: 10000,
-          	type: [myOption.type]
+          	type: [myType]
         }, callback);
     }
 

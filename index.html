@@ -26,7 +26,7 @@
           <button class="red-button" ng-click="resetMap()">Reset</button>
            <h1 id="what-is">US Cities by Population Rank</h1>
         </div>
-        <div class="city-row" ng-repeat="city in (filteredCities = (cities | filter: filterStr)) track by city.yearRank">
+        <div class="city-row" ng-repeat="city in filteredCities = (cities | filter:filterStr) track by city.yearRank">
           <h4 class="city-name">{{city.yearRank}}: {{city.city}}</h4>
           <button class="blue-button med-button" ng-click="showInfo(city.yearRank)">Show Info</button>
           <!-- <select ng-model="" class="search-for blue-button">
@@ -36,10 +36,9 @@
             <option value="2">Pharmacies</option>
             <option value="3">Lawyers</option>
           </select> -->
-          <!-- <div ng-controller="selectCtrl"> -->
-            <select class="search-for blue-button" ng-change="selectAction()" ng-model="myOption" ng-options="value.type as value.label for value in placeTypes">
-              <option>Find a&ellip;</option>
-            </select>
+          <select class="search-for blue-button" ng-model="city.place" ng-options="value as value.label for value in placeTypes">
+            <!-- <option>Find a&ellip;</option> -->
+          </select>
           <button class="blue-button small-button" ng-click="zoomTo(city.yearRank)">Find</button>
         </div>
       </div>
