@@ -1,35 +1,63 @@
 var mapsApp = angular.module('mapsApp', []);
 
+/* function selectCtrl($scope) {
+	
+} */
+
 mapsApp.controller('mapsController', function($scope, $compile){
+	// variable declarations
+	//var myForms = document.getElementsByClassName('search-for');
 	var kansas = new google.maps.LatLng(40.00, -98.00);
-	$scope.cities = cities;
-  
-	var placeTypes = [ 'pet_store', 'liquor_store', 'pharmacy', 'lawyer' ]
-	$scope.map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 4,
-		center: kansas
-	});
-
-	// initialize autocomplete stuff
-	var filterInput =  /** @type {!HTMLInputElement} */(
-		document.getElementById('filter-input'));
-	var autocomplete = new google.maps.places.Autocomplete(filterInput);
-	autocomplete.bindTo('bounds', $scope.map);
-	// end autocomplete initialization
-
+	//var placeTypes = [ 'pet_store', 'liquor_store', 'pharmacy', 'lawyer' ];
 	$scope.markers = [];
 	var searchMarkers = [];
+	$scope.cities = cities;
+	$scope.map;
+	$scope.directionsService;
+	$scope.directionsDisplay;
+	var placesService;
+	var infowindow;
 
-	var infowindow = new google.maps.InfoWindow;
+	$scope.placeTypes = placeTypes;
+	$scope.selectAction = function() {
+		console.log($scope.myOption);
+	}
 
-	// initialize places service
-	var service = new google.maps.places.PlacesService($scope.map);
+	function initMap() {
+		$scope.map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 4,
+			center: kansas
+		});
 
-	// initialize directions service
-	$scope.directionsService = new google.maps.DirectionsService();
-	$scope.directionsDisplay = new google.maps.DirectionsRenderer();
-	$scope.directionsDisplay.setMap($scope.map);
-	$scope.directionsDisplay.setPanel(document.getElementById('directions-panel'));
+		infowindow = new google.maps.InfoWindow;
+		// initialize autocomplete stuff
+		var filterInput =  /** @type {!HTMLInputElement} */(
+			document.getElementById('filter-input'));
+		var autocomplete = new google.maps.places.Autocomplete(filterInput);
+		autocomplete.bindTo('bounds', $scope.map);
+		// initialize places service
+		placesService = new google.maps.places.PlacesService($scope.map);
+		// initialize directions service
+		$scope.directionsService = new google.maps.DirectionsService();
+		$scope.directionsDisplay = new google.maps.DirectionsRenderer();
+		$scope.directionsDisplay.setMap($scope.map);
+		$scope.directionsDisplay.setPanel(document.getElementById('directions-panel'));
+
+		// this loop creates a marker for each city by calling createMarker
+		for (i=0; i<cities.length; i++) {
+			createMarker(cities[i]);
+		}
+
+		// add a listener to the autocomplete
+		autocomplete.addListener('place_changed', function() {
+		    infowindow.close();
+		    var place = autocomplete.getPlace();
+		    if (!place.geometry) {
+		      window.alert("Autocomplete's returned place contains no geometry");
+		      return;
+		    }
+		});
+	}
 
 	function createMarker(city) {
 		var latLon = city.latLon.split(",");
@@ -67,43 +95,29 @@ mapsApp.controller('mapsController', function($scope, $compile){
 		$scope.markers.push(marker);
 	} // end createMarker
 
-	// this loop creates a marker for each city by calling createMarker
-	for (i=0; i<cities.length; i++) {
-		createMarker(cities[i]);
-	}
-
-	// add a listener to the autocomplete
-	autocomplete.addListener('place_changed', function() {
-	    infowindow.close();
-	    var place = autocomplete.getPlace();
-	    if (!place.geometry) {
-	      window.alert("Autocomplete's returned place contains no geometry");
-	      return;
-	    }
-	});
-
 	$scope.showInfo = function(i){
+		var j = Number(i)-1;
+		console.log(j);
 		// trigger the click event on a particular marker when the appropriate side-panel button is clicked
-    	google.maps.event.trigger($scope.markers[i], 'click');
+    	google.maps.event.trigger($scope.markers[j], 'click');
   	}
 
   	$scope.zoomTo = function(i){
-		var myForms = document.getElementsByClassName('search-for');
-		var myType = myForms[i].value;
-		console.dir(myForms);
-		if (myType == '') {
-			return;
-		}
-  		var latLon = cities[i].latLon.split(",");
+  		infowindow.close();
+  		var j = Number(i)-1;
+  		console.log(j);
+		//myForms[j] = document.getElementsByClassName('search-for')[j];
+		//var myType = myForms[j].value;
+  		var latLon = cities[j].latLon.split(",");
 		var newLat = Number(latLon[0]);
 		var newLon = Number(latLon[1]);
 		var newLocation = new google.maps.LatLng(newLat, newLon);
 		$scope.map.setCenter({lat: newLat, lng: newLon});
 		$scope.map.setZoom(11);
-		service.nearbySearch({
+		placesService.nearbySearch({
           	location: newLocation,
           	radius: 10000,
-          	type: [placeTypes[myType]]
+          	type: [myOption.type]
         }, callback);
     }
 
@@ -139,6 +153,7 @@ mapsApp.controller('mapsController', function($scope, $compile){
     }
 
   	$scope.getDirections = function(lat,lon){
+  		infowindow.close();
   		var latLon = cities[38].latLon.split(",");
 		var atlLat = latLon[0];
 		var atlLon = latLon[1];
@@ -151,8 +166,6 @@ mapsApp.controller('mapsController', function($scope, $compile){
     		travelMode: google.maps.TravelMode.DRIVING
   		};
   		
-  		infowindow.close();
-
   		$scope.directionsService.route(request, function(result, status) {
 			if (status == google.maps.DirectionsStatus.OK) {
 		  		$scope.directionsDisplay.setDirections(result);
@@ -167,4 +180,5 @@ mapsApp.controller('mapsController', function($scope, $compile){
 		$scope.map.setZoom(4);
   	}
 
+	initMap();
 })
