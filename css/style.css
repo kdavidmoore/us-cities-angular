@@ -27,31 +27,75 @@ body {
   padding: 10px;
 }
 /* line 26, ../compass/sass/style.scss */
-#side-panel #what-is {
+#side-panel #side-top-wrapper {
+  text-align: center;
+}
+/* line 28, ../compass/sass/style.scss */
+#side-panel #side-top-wrapper .red-button {
+  margin-bottom: 10px;
+  width: 60px;
+  background-color: #EE6E73;
+  color: white;
+  border-radius: 2px;
+  height: 30px;
+  border: 1px solid #EE6E73;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  outline: none;
+  font-size: 12px;
+  text-transform: uppercase;
+  transition: background-color .2s ,box-shadow .2s;
+  transition-property: background-color, box-shadow;
+  transition-duration: 0.2s, 0.2s;
+  transition-timing-function: initial, initial;
+  transition-delay: initial, initial;
+}
+/* line 46, ../compass/sass/style.scss */
+#side-panel #side-top-wrapper .red-button:hover {
+  background-color: #CC444B;
+  border-color: #CC444B;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+/* line 51, ../compass/sass/style.scss */
+#side-panel #side-top-wrapper .red-button:active {
+  background-color: #AA242B;
+  border-color: #AA242B;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+/* line 56, ../compass/sass/style.scss */
+#side-panel #side-top-wrapper #filter-input {
+  font-size: 1.1em;
+  line-height: 1.2em;
+  text-align: center;
+  margin-bottom: 10px;
+  position: relative;
+  top: 2px;
+}
+/* line 64, ../compass/sass/style.scss */
+#side-panel #side-top-wrapper #what-is {
   color: #757575;
   font-size: 1.3em;
   font-weight: bold;
-  line-height: 1.3em;
   text-align: center;
+  margin-bottom: 10px;
 }
-/* line 33, ../compass/sass/style.scss */
+/* line 72, ../compass/sass/style.scss */
 #side-panel #directions-panel {
   width: 100%;
 }
-/* line 36, ../compass/sass/style.scss */
+/* line 75, ../compass/sass/style.scss */
 #side-panel .city-row {
   width: 100%;
   text-align: center;
   padding-bottom: 10px;
 }
-/* line 40, ../compass/sass/style.scss */
+/* line 79, ../compass/sass/style.scss */
 #side-panel .city-row .city-name {
   width: 100%;
   text-align: left;
   color: #757575;
-  line-height: 1.5em;
+  margin-bottom: 10px;
 }
-/* line 46, ../compass/sass/style.scss */
+/* line 85, ../compass/sass/style.scss */
 #side-panel .city-row .blue-button {
   width: 120px;
   background-color: #039BE5;
@@ -69,49 +113,57 @@ body {
   transition-timing-function: initial, initial;
   transition-delay: initial, initial;
 }
-/* line 63, ../compass/sass/style.scss */
+/* line 102, ../compass/sass/style.scss */
 #side-panel .city-row .blue-button:hover {
   background-color: #026A9D;
   border-color: #026A9D;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
-/* line 68, ../compass/sass/style.scss */
+/* line 107, ../compass/sass/style.scss */
 #side-panel .city-row .blue-button:active {
   background-color: #025279;
   border-color: #025279;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
+/* line 112, ../compass/sass/style.scss */
+#side-panel .city-row .blue-button.small-button {
+  width: 50px;
+}
+/* line 115, ../compass/sass/style.scss */
+#side-panel .city-row .blue-button.med-button {
+  width: 90px;
+}
 
-/* line 77, ../compass/sass/style.scss */
+/* line 122, ../compass/sass/style.scss */
 .city-info .city-header {
   font-size: 1.8em;
   font-weight: bold;
   line-height: 1.5em;
 }
-/* line 82, ../compass/sass/style.scss */
+/* line 127, ../compass/sass/style.scss */
 .city-info .span {
   font-weight: bold;
 }
-/* line 85, ../compass/sass/style.scss */
+/* line 130, ../compass/sass/style.scss */
 .city-info a:link, .city-info a:visited {
   color: #0000EE;
 }
 
 @media screen and (max-width: 1024px) {
-  /* line 91, ../compass/sass/style.scss */
+  /* line 136, ../compass/sass/style.scss */
   #map-wrapper {
     width: 100%;
     height: 70vh;
     position: static;
   }
 
-  /* line 96, ../compass/sass/style.scss */
+  /* line 141, ../compass/sass/style.scss */
   #side-panel {
     width: 100%;
     bottom: 0;
     position: static;
   }
-  /* line 100, ../compass/sass/style.scss */
+  /* line 145, ../compass/sass/style.scss */
   #side-panel .city-name {
     text-align: center;
   }
