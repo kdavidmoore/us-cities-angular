@@ -1,10 +1,24 @@
-var mapsApp = angular.module('mapsApp', []);
+var mapsApp = angular.module('mapsApp', ['ngRoute']);
+
+mapsApp.config(function($routeProvider){
+	$routeProvider.when('/',{
+		templateUrl: 'pages/front.html',
+		controller: 'mapsController'
+	});
+	$routeProvider.when('/zoom',{
+		templateUrl: 'pages/zoom.html',
+		controller: 'zoomController'
+	});
+	// send the user back to the home page if the route is not valid
+	$routeProvider.otherwise({
+		templateUrl: 'pages/front.html',
+		controller: 'mapsController'
+	});
+})
 
 mapsApp.controller('mapsController', function($scope, $compile){
 	// variable declarations
-	//var myForms = document.getElementsByClassName('search-for');
 	var kansas = new google.maps.LatLng(40.00, -98.00);
-	//var placeTypes = [ 'pet_store', 'liquor_store', 'pharmacy', 'lawyer' ];
 	$scope.markers = [];
 	var searchMarkers = [];
 	$scope.cities = cities;
@@ -100,8 +114,6 @@ mapsApp.controller('mapsController', function($scope, $compile){
   		var j = Number(i)-1;
   		console.log(j);
   		myType = $scope.cities[j].place.type;
-		//myForms[j] = document.getElementsByClassName('search-for')[j];
-		//var myType = myForms[j].value;
   		var latLon = cities[j].latLon.split(",");
 		var newLat = Number(latLon[0]);
 		var newLon = Number(latLon[1]);
@@ -126,17 +138,57 @@ mapsApp.controller('mapsController', function($scope, $compile){
 	}
 
 	function createSearchMarker(place) {
-        var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
           map: $scope.map,
-          position: place.geometry.location
+          position: place.geometry.location,
+          animation: google.maps.Animation.DROP,
+          place: {
+        	placeId: place.place_id,
+        	location: place.geometry.location
+      		}
         });
-        searchMarkers.push(marker);
 
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
-          infowindow.open($scope.map, this);
-        });
+        var request = {
+  			placeId: place.place_id
+		};
+
+		placesService.getDetails(request, detailCallback);
+
+		function detailCallback(place, status) {
+			if (status == google.maps.places.PlacesServiceStatus.OK) {
+				var lat = place.geometry.location.lat();
+				var long = place.geometry.location.lng();
+				var contentString = 
+		    		'<div class="city-info">'+
+					'<h1 class="city-header">'+ place.name + '</h1>'+
+					'<div class="city-info-text">'+ place.formatted_address + '</div>'+
+					'<a href="" ng-click="getDirections('+ lat + ',' + long +')">Get Directions</a>'+
+					'</div>';
+
+		   		var compiledContent = $compile(contentString)($scope);
+
+		        google.maps.event.addListener(marker, 'click', function() {
+		          infowindow.setContent(compiledContent[0]);
+		          infowindow.open($scope.map, this);
+		        });
+
+		        searchMarkers.push(marker);
+	  		} else {
+	  			var contentString = 
+		    		'<div class="city-info">'+
+					'<div class="city-info-text">Unable to get details</div>'+
+					'</div>';
+
+		   		var compiledContent = $compile(contentString)($scope);
+
+		        google.maps.event.addListener(marker, 'click', function() {
+		          infowindow.setContent(compiledContent[0]);
+		          infowindow.open($scope.map, this);
+		        });
+
+		        searchMarkers.push(marker);
+	  		}
+		}
     }
 
     function clearMarkers() {

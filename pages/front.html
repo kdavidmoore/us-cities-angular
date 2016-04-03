@@ -1,0 +1,22 @@
+<div ng-controller="mapsController">
+  <div id="map-wrapper">
+    <div id="map"></div>
+  </div>
+  <div id="side-panel">
+    <div id="directions-panel">
+      <!-- placeholder -->
+    </div>
+    <div id="side-top-wrapper">
+      <input id="filter-input" class="controls" type="text" ng-model="filterStr" placeholder="Find your city">
+      <button class="red-button" ng-click="resetMap()">Reset</button>
+      <h1 id="what-is">US Cities by Population Rank</h1>
+    </div>
+    <div class="city-row" ng-repeat="city in filteredCities = (cities | filter:filterStr) track by city.yearRank">
+      <h4 class="city-name">{{city.yearRank}}: {{city.city}}</h4>
+      <button class="blue-button med-button" ng-click="showInfo(city.yearRank)">Show Info</button>
+      <select class="search-for blue-button" ng-model="city.place" ng-options="value as value.label for value in placeTypes">
+      </select>
+      <button class="blue-button small-button" ng-click="zoomTo(city.yearRank)">Find</button>
+    </div>
+  </div>
+</div>
