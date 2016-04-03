@@ -138,17 +138,57 @@ mapsApp.controller('mapsController', function($scope, $compile){
 	}
 
 	function createSearchMarker(place) {
-        var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
           map: $scope.map,
-          position: place.geometry.location
+          position: place.geometry.location,
+          animation: google.maps.Animation.DROP,
+          place: {
+        	placeId: place.place_id,
+        	location: place.geometry.location
+      		}
         });
-        searchMarkers.push(marker);
 
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
-          infowindow.open($scope.map, this);
-        });
+        var request = {
+  			placeId: place.place_id
+		};
+
+		placesService.getDetails(request, detailCallback);
+
+		function detailCallback(place, status) {
+			if (status == google.maps.places.PlacesServiceStatus.OK) {
+				var lat = place.geometry.location.lat();
+				var long = place.geometry.location.lng();
+				var contentString = 
+		    		'<div class="city-info">'+
+					'<h1 class="city-header">'+ place.name + '</h1>'+
+					'<div class="city-info-text">'+ place.formatted_address + '</div>'+
+					'<a href="" ng-click="getDirections('+ lat + ',' + long +')">Get Directions</a>'+
+					'</div>';
+
+		   		var compiledContent = $compile(contentString)($scope);
+
+		        google.maps.event.addListener(marker, 'click', function() {
+		          infowindow.setContent(compiledContent[0]);
+		          infowindow.open($scope.map, this);
+		        });
+
+		        searchMarkers.push(marker);
+	  		} else {
+	  			var contentString = 
+		    		'<div class="city-info">'+
+					'<div class="city-info-text">Unable to get details</div>'+
+					'</div>';
+
+		   		var compiledContent = $compile(contentString)($scope);
+
+		        google.maps.event.addListener(marker, 'click', function() {
+		          infowindow.setContent(compiledContent[0]);
+		          infowindow.open($scope.map, this);
+		        });
+
+		        searchMarkers.push(marker);
+	  		}
+		}
     }
 
     function clearMarkers() {
