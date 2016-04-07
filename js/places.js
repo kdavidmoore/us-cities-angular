@@ -1,4 +1,4 @@
-var placeTypes = [
+var places = [
 { 
 	id: 0,
 	label: "Accountants",
@@ -41,26 +41,21 @@ var placeTypes = [
 },
 { 
 	id: 8,
-	label: "Electricians",
-	type: "electrician"
-},
-{ 
-	id: 9,
 	label: "Painters",
 	type: "painter"
 },
 { 
-	id: 10,
+	id: 9,
 	label: "Plumbers",
 	type: "plumber"
 },
 { 
-	id: 11,
+	id: 10,
 	label: "Real Estate Agents",
 	type: "real_estate_agency"
 },
 { 
-	id: 12,
+	id: 11,
 	label: "Veterinarians",
 	type: "veterinary_care"
 }];

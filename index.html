@@ -1,22 +1,33 @@
 <!DOCTYPE html>
-<html ng-app="mapsApp">
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Find Things in Your Area</title>
-    <link rel="stylesheet" type="text/css" href="reset.css">
+<html ng-app="mapApp">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script type="text/javascript" src="js/angular.min.js"></script>
-    <script type="text/javascript" src="js/angular-route.min.js"></script>
-    <script type="text/javascript" src="js/angular-animate.min.js"></script>
+    <title>Find Things in Your Area</title>
+</head>
+<body>
+    
+    <div ng-view></div>
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-cookies.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+
+    <!-- my scripts -->
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIEKQEQmbOz2q9VEINcWWO15WMS5kcoIU&libraries=places"></script>
     <script src="js/cities.js"></script>
     <script src="js/places.js"></script>
-    <script src="js/mainController.js"></script>
-  </head>
-  <body>
-    <div ng-view>
-      <!-- front goes here -->
-    </div>
-  </body>
+    <script src="js/mapModule.js"></script>
+    <script src="js/mapController.js"></script>
+    <script src="js/cityController.js"></script>
+</body>
 </html>

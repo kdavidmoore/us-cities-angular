@@ -10,7 +10,7 @@ body {
   left: 0;
   height: 100vh;
   width: 70%;
-  #map {
+  #map, #city-map {
     height: 100%;
   }
 }
@@ -22,37 +22,9 @@ body {
   top: 0;
   right: 0;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 5px;
   #side-top-wrapper {
     text-align: center;
-    .red-button {
-      margin-bottom: 10px;
-      width: 60px;
-      background-color: $red-button-color;
-      color: white;
-      border-radius: 2px;
-      height: 30px;
-      border: 1px solid $red-button-color;
-      box-shadow: 0 1px 4px rgba(0,0,0,.5);
-      outline: none;
-      font-size: 12px;
-      text-transform: uppercase;
-      transition: background-color .2s ,box-shadow .2s;
-        transition-property: background-color, box-shadow;
-        transition-duration: 0.2s, 0.2s;
-        transition-timing-function: initial, initial;
-        transition-delay: initial, initial;
-    }
-    .red-button:hover {
-      background-color: $red-hover-color;
-      border-color: $red-hover-color;
-      box-shadow: 0 2px 8px rgba(0,0,0,.5);
-    }
-    .red-button:active {
-      background-color: $red-active-color;
-      border-color: $red-active-color;
-      box-shadow: 0 2px 8px rgba(0,0,0,.5);
-    }
     #filter-input {
       font-size: 1.1em;
       line-height: 1.2em;
@@ -69,9 +41,6 @@ body {
       margin-bottom: 10px;
     }
   }
-  #directions-panel {
-    width: 100%;
-  }
   .city-row {
     width: 100%;
     text-align: center;
@@ -81,39 +50,6 @@ body {
       text-align: left;
       color: $font-color-grey;
       margin-bottom: 10px;
-    }
-    .blue-button {
-      width: 120px;
-      background-color: $button-color;
-      color: white;
-      border-radius: 2px;
-      height: 30px;
-      border: 1px solid #0395DF;
-      box-shadow: 0 1px 4px rgba(0,0,0,.5);
-      outline: none;
-      font-size: 12px;
-      text-transform: uppercase;
-      transition: background-color .2s ,box-shadow .2s;
-        transition-property: background-color, box-shadow;
-        transition-duration: 0.2s, 0.2s;
-        transition-timing-function: initial, initial;
-        transition-delay: initial, initial;
-    }
-    .blue-button:hover {
-      background-color: $button-hover-color;
-      border-color: $button-hover-color;
-      box-shadow: 0 2px 8px rgba(0,0,0,.5);
-    }
-    .blue-button:active {
-      background-color: $button-active-color;
-      border-color: $button-active-color;
-      box-shadow: 0 2px 8px rgba(0,0,0,.5);
-    }
-    .blue-button.small-button {
-      width: 50px;
-    }
-    .blue-button.med-button {
-      width: 90px;
     }
   }
 }
@@ -146,4 +82,16 @@ body {
       text-align: center;
     }
   } 
+}
+
+.view-height {
+  height: 100vh;
+}
+.hidden{
+ display: none;
+}
+.small-button {
+  min-width: 1%;
+  position: relative;
+  top: 19px;
 }
