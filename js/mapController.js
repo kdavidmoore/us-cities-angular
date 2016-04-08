@@ -5,12 +5,32 @@ mapApp.controller("mapController", function($scope, $compile, $http, $routeParam
 	$scope.places = places;
 	$scope.markers = [];
 
+	// clear previous markers
+	/* if ($scope.markers.length > 0) {
+		clearMarkers();
+	} */
+
 	$scope.map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
     center: new google.maps.LatLng(40.0000, -98.0000)
 	 });
 
 	var infowindow = new google.maps.InfoWindow;
+
+	var filterInput =  /** @type {!HTMLInputElement} */(
+		document.getElementById('filter-input'));
+	var autocomplete = new google.maps.places.Autocomplete(filterInput);
+	autocomplete.bindTo('bounds', $scope.map);
+
+	// add a listener to the autocomplete
+	autocomplete.addListener('place_changed', function() {
+	    infowindow.close();
+	    var place = autocomplete.getPlace();
+	    if (!place.geometry) {
+	      window.alert("Autocomplete's returned place contains no geometry");
+	      return;
+	    }
+	});
 
   	$scope.createMarker = function (city){
 	  	var latLon = city.latLon.split(",");
@@ -83,4 +103,11 @@ mapApp.controller("mapController", function($scope, $compile, $http, $routeParam
 	for(var i = 0; i < cities.length; i++){
 		$scope.createMarker(cities[i]);
 	}
+
+	function clearMarkers() {
+    	for (var i=0; i<$scope.markers.length; i++) {
+    		$scope.markers[i].setMap(null);
+  		}	
+  		$scope.markers = [];
+    }
 });

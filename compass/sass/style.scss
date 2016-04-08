@@ -23,16 +23,15 @@ body {
   right: 0;
   box-sizing: border-box;
   padding: 5px;
+  .small-button {
+    min-width: 1%;
+  }
+  .offset-button {
+    position: relative;
+    top: 19px;
+  }
   #side-top-wrapper {
     text-align: center;
-    #filter-input {
-      font-size: 1.1em;
-      line-height: 1.2em;
-      text-align: center;
-      margin-bottom: 10px;
-      position: relative;
-      top: 2px;
-    }
     #what-is {
       color: $font-color-grey;
       font-size: 1.3em;
@@ -44,12 +43,10 @@ body {
   .city-row {
     width: 100%;
     text-align: center;
-    padding-bottom: 10px;  
     .city-name {
       width: 100%;
       text-align: left;
       color: $font-color-grey;
-      margin-bottom: 10px;
     }
   }
 }
@@ -78,6 +75,9 @@ body {
     width: 100%;
     bottom: 0;
     position: static;
+    .small-button, md-input-container {
+      min-width: 80%;
+    }
     .city-name {
       text-align: center;
     }
@@ -89,9 +89,4 @@ body {
 }
 .hidden{
  display: none;
-}
-.small-button {
-  min-width: 1%;
-  position: relative;
-  top: 19px;
 }

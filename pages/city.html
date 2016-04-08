@@ -2,17 +2,19 @@
   <div id="city-map"></div>
 </div>
 <div id="side-panel">
-<div id="directions-panel"></div>
+  <div id="directions-panel"></div>
   <div id="map-panel">
     <div id="side-top-wrapper">
-      <input id="filter-input" class="controls" type="text" ng-model="filterStr" placeholder="Find your city">
+      <md-input-container>
+        <input id="filter-input" class="controls" type="text" ng-model="filterStr" placeholder="Find your city">
+      </md-input-container>
       <md-button class="md-warn md-raised small-button" md-ripple-size="full" ng-href="/#/">Reset</md-button>
       <h1 id="what-is">US Cities by Population Rank</h1>
     </div>
     <div class="city-row" ng-repeat="city in filteredCities = (cities | filter:filterStr) track by city.yearRank">
       <h4 class="city-name">{{city.yearRank}}: {{city.city}}</h4>
       <div class="buttons-wrapper">
-        <md-button class="md-raised" ng-click="showInfo(city.yearRank)" md-ripple-size="full">Show Info</md-button>
+        <md-button class="md-raised small-button" ng-click="showInfo(city.yearRank)" md-ripple-size="full">Info</md-button>
         <md-input-container>
           <label>Type of place</label>
             <md-select ng-model="city.place">
@@ -21,7 +23,7 @@
               </md-option>
           </md-select>
         </md-input-container>
-        <md-button class="md-primary md-raised small-button" ng-href="#/city/{{city.yearRank}}" md-ripple-size="full">Find</md-button>
+        <md-button class="md-primary md-raised small-button offset-button" ng-href="#/city/{{city.yearRank}}" md-ripple-size="full">Find</md-button>
       </div>
     </div>
   </div>

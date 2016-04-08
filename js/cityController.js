@@ -12,7 +12,13 @@ mapApp.controller("cityController", function($scope, $compile, $http, $routePara
 	var myType = $scope.cities[cityIndex-1].place;
 	//console.log($scope.cities[cityIndex-1].place);
 	var infowindow = new google.maps.InfoWindow;
-	
+
+	// clear previous markers
+	/* if (searchMarkers.length > 0) {
+		clearMarkers();
+	} */
+
+	// prevent map is undefined errors
 	var storedMap = cityService.get();
 	console.log("According to my service, the next line is the stored map.");
 	console.log(storedMap);
@@ -28,7 +34,7 @@ mapApp.controller("cityController", function($scope, $compile, $http, $routePara
 	} else {
 		$scope.map = storedMap;
 		$scope.map.setCenter(center);
-		$scope.map.setZoom(12);    		
+		$scope.map.setZoom(12);	
 	}
 
     var service = new google.maps.places.PlacesService($scope.map);
@@ -40,7 +46,7 @@ mapApp.controller("cityController", function($scope, $compile, $http, $routePara
           
 	function callback(results, status) {
 		if (status === google.maps.places.PlacesServiceStatus.OK) {
-			clearMarkers();
+			//clearMarkers();
 			for (var i = 0; i < results.length; i++) {
 				createMarker(results[i]);
 			}
