@@ -10,15 +10,9 @@ mapApp.controller("cityController", function($scope, $compile, $http, $routePara
 	var lon = latLon[1];
 	var center = new google.maps.LatLng(lat, lon);
 	var myType = $scope.cities[cityIndex-1].place;
-	//console.log($scope.cities[cityIndex-1].place);
 	var infowindow = new google.maps.InfoWindow;
 
-	// clear previous markers
-	/* if (searchMarkers.length > 0) {
-		clearMarkers();
-	} */
-
-	// prevent map is undefined errors
+	// prevent map-is-undefined errors
 	var storedMap = cityService.get();
 	console.log("According to my service, the next line is the stored map.");
 	console.log(storedMap);

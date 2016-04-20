@@ -1,14 +1,11 @@
-// create the controller and inject Angular's $scope, as well as our service.
 mapApp.controller("mapController", function($scope, $compile, $http, $routeParams, cityService){
-	console.log($routeParams);
-	var checkedPlaces = [];
 	$scope.places = places;
 	$scope.markers = [];
 
-	// clear previous markers
-	/* if ($scope.markers.length > 0) {
+	// clear any previous markers
+	if ($scope.markers.length > 0) {
 		clearMarkers();
-	} */
+	}
 
 	$scope.map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
@@ -22,7 +19,7 @@ mapApp.controller("mapController", function($scope, $compile, $http, $routeParam
 	var autocomplete = new google.maps.places.Autocomplete(filterInput);
 	autocomplete.bindTo('bounds', $scope.map);
 
-	// add a listener to the autocomplete
+	// add an autocomplete listener to the search element
 	autocomplete.addListener('place_changed', function() {
 	    infowindow.close();
 	    var place = autocomplete.getPlace();
