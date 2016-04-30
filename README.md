@@ -1,8 +1,13 @@
-# Locate Services in Your Area
+# Search Places
 
-## Demonstration of Google Maps API, AngularJS, and Node.js
+Search for places and get directions using Google Maps JavaScript API and AngularJS
 
-A single-page app that displays selected data on major US cities (sorted by estimated population) on a Google Maps layer. Google Maps API services used include Places, Directions, and Autocomplete. The user can search for different types of places (in this case, professional services) in each of these cities, and the search results are displayed as markers, along with info windows (where data are available). AngularJS is used to handle interactions between cities data, places data, and the user interface. Angular routing (ngRoute) and a simple Node.js server are used to put the map from front.html and put it on index.html.
+## Features
+* Single-page app built using AngularJS and ngRoute
+* Pulls list of top 30 (by population) cities from local JSON file
+* Display information on places and get directions using Google Maps JavaScript API Places and Directions services
+* Search for cities using Google Maps API Autocomplete service
+* Simple node.js server for local testing
 
 ## [Demo here](http://www.kdavidmoore.com/search-places)
 
